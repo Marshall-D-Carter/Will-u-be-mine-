@@ -18,4 +18,4 @@ A playful and heartfelt interactive webpage built with HTML, CSS, and JavaScript
 1. Download or clone the repo:
 
 ```bash
-git clone https://github.com/yourusername/will-you-be-mine.git
+git clone https://github.com/Marshall-D-Carter/will-you-be-mine.git
