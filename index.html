@@ -1,159 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Will You Be Mine?</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #ffd1dc;
-    }
+<script>
+const acceptedDOBs = ["2009-11-24"];
 
-    .page {
-      display: none;
-      text-align: center;
-      padding: 30px;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      animation: fadeIn 0.8s ease-in-out;
-    }
+let yesScale = 1;
+let noScale = 1;
 
-    .active {
-      display: block;
-    }
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
 
-    input, button {
-      padding: 12px 20px;
-      margin-top: 10px;
-      font-size: 16px;
-      border: none;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      outline: none;
-    }
+function goToPage2() {
+  const name = document.getElementById('nameInput').value.trim();
+  if (!name) {
+    alert("Please enter your name 💗");
+    return;
+  }
+  showPage('page2');
+}
 
-    input {
-      width: 80%;
-      max-width: 300px;
-      margin-bottom: 15px;
-    }
+function checkDOB() {
+  const dob = document.getElementById('dobInput').value;
+  const age = document.getElementById('ageInput').value;
 
-    button {
-      background-color: #ff6fa1;
-      color: white;
-      cursor: pointer;
-    }
+  if (!dob || !age) {
+    alert("Fill both age and date of birth 💕");
+    return;
+  }
 
-    .small-no {
-      font-size: 12px;
-      margin-left: 10px;
-    }
+  if (acceptedDOBs.includes(dob)) {
+    showPage('page3');
+    resetButtons();
+  } else {
+    showPage('wrongPerson');
+  }
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
-  </style>
-</head>
-<body>
+function resetButtons() {
+  yesScale = 1;
+  noScale = 1;
 
-  <div class="page active" id="page1">
-    <h2>What's your name?</h2>
-    <input type="text" id="nameInput" placeholder="Enter your name" />
-    <br>
-    <button onclick="goToPage2()">Next</button>
-  </div>
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
 
-  <div class="page" id="page2">
-    <h2>How old are you and when were you born?</h2>
-    <input type="number" id="ageInput" placeholder="Enter your age" />
-    <br>
-    <input type="date" id="dobInput" />
-    <br>
-    <button onclick="checkDOB()">Next</button>
-  </div>
+  yesBtn.style.transform = "scale(1)";
+  noBtn.style.transform = "translateX(-50%) scale(1)";
+  noBtn.style.left = "50%";
+  noBtn.style.top = "70%";
+}
 
-  <div class="page" id="wrongPerson">
-    <h2>Sorry, wrong person 😔</h2>
-  </div>
+function moveNo() {
+  const noBtn = document.getElementById("noBtn");
+  const page = noBtn.closest(".page");
 
-  <div class="page" id="page3">
-    <h2>Will you be mine?</h2>
-    <button onclick="handleYes()">Yes</button>
-    <button onclick="handleNo()">No</button>
-  </div>
+  const padding = 20;
+  const maxX = page.clientWidth - noBtn.offsetWidth - padding;
+  const maxY = page.clientHeight - noBtn.offsetHeight - padding;
 
-  <div class="page" id="page4">
-    <h2>Will you be mine?</h2>
-    <button onclick="handleYes()">Yes</button>
-    <button onclick="handleNoSecond()">No<span class="small-no">(true fs)</span></button>
-  </div>
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
 
-  <div class="page" id="page5">
-    <h2>Will you be mine?</h2>
-    <button onclick="handleYes()">Yes</button>
-  </div>
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
 
-  <div class="page" id="finalPage">
+  noScale *= 0.7;
+  noBtn.style.transform = `scale(${noScale})`;
 
-  </div<h2>
-I know you are mine and I am yours,<br>
-and I love you like the fish loves the sea<br>
-and the bee loves its flower.<br>
-I will love you till my last breath,<br>
-and even after I die,<br>
-my soul will search for you in another universe.<br>
-Mwah, love you forever my darling 💋❤️
-  </h2>>
+  growYes();
+}
 
-  <script>
-    const acceptedDOBs = ["2009-11-24"]; 
+function growYes() {
+  const yesBtn = document.getElementById("yesBtn");
+  yesScale *= 1.4;
+  yesBtn.style.transform = `scale(${yesScale})`;
+}
 
-    function showPage(id) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
-
-    function goToPage2() {
-      const name = document.getElementById('nameInput').value.trim();
-      if (name === '') {
-        alert('Please enter your name.');
-        return;
-      }
-      showPage('page2');
-    }
-
-    function checkDOB() {
-      const dob = document.getElementById('dobInput').value;
-
-      if (acceptedDOBs.includes(dob)) {
-        showPage('page3');
-      } else {
-        showPage('wrongPerson');
-      }
-    }
-
-    function handleYes() {
-      showPage('finalPage');
-    }
-
-    function handleNo() {
-      showPage('page4');
-    }
-
-    function handleNoSecond() {
-      showPage('page5');
-    }
-  </script>
-
-</body>
-</html>
-
-
-
+function handleYes() {
+  showPage("finalPage");
+}
+</script>
