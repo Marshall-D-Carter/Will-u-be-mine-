@@ -1,3 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Will You Be Mine?</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffd1dc, #ffe6ee);
+    padding: 20px;
+  }
+
+  .page {
+    display: none;
+    text-align: center;
+    padding: 25px;
+    background: white;
+    border-radius: 22px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    max-width: 380px;
+    width: 100%;
+    min-height: 300px;
+    animation: fadeIn 0.6s ease-in-out;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .active {
+    display: block;
+  }
+
+  h2 {
+    color: #ff4f8b;
+  }
+
+  input, button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    outline: none;
+  }
+
+  input {
+    background: #f7f7f7;
+  }
+
+  button {
+    background: linear-gradient(135deg, #ff6fa1, #ff4f8b);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  #noBtn {
+    position: absolute;
+    transition: all 0.3s ease;
+    background: #999;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="page active" id="page1">
+  <h2>What's your name?</h2>
+  <input type="text" id="nameInput" placeholder="Enter your name 💕">
+  <button onclick="goToPage2()">Next</button>
+</div>
+
+<div class="page" id="page2">
+  <h2>How old are you & when were you born?</h2>
+  <input type="number" id="ageInput" placeholder="Your age">
+  <input type="date" id="dobInput">
+  <button onclick="checkDOB()">Next</button>
+</div>
+
+<div class="page" id="wrongPerson">
+  <h2>Sorry, wrong person 😔</h2>
+</div>
+
+<div class="page" id="page3">
+  <h2>Will you be mine?</h2>
+  <button id="yesBtn" onclick="growYes()">Yes 💖</button>
+  <button id="noBtn" onclick="moveNo()">No</button>
+</div>
+
+<div class="page" id="finalPage">
+  <h2>
+    I know you are mine and I am yours 💕💖<br><br>
+    I love you like the fish loves the sea 🌊<br>
+    and the bee loves its flower 🌷<br><br>
+    I will love you till my last breath<br>
+    and even after I die hehe 🐤<br><br>
+    My soul will search for you in another universe ✨<br><br>
+    Mwah, love you forever 💋❤️
+  </h2>
+</div>
+
 <script>
 const acceptedDOBs = ["2009-11-24"];
 
@@ -20,13 +133,6 @@ function goToPage2() {
 
 function checkDOB() {
   const dob = document.getElementById('dobInput').value;
-  const age = document.getElementById('ageInput').value;
-
-  if (!dob || !age) {
-    alert("Fill both age and date of birth 💕");
-    return;
-  }
-
   if (acceptedDOBs.includes(dob)) {
     showPage('page3');
     resetButtons();
@@ -38,23 +144,21 @@ function checkDOB() {
 function resetButtons() {
   yesScale = 1;
   noScale = 1;
-
   const yesBtn = document.getElementById("yesBtn");
   const noBtn = document.getElementById("noBtn");
-
   yesBtn.style.transform = "scale(1)";
-  noBtn.style.transform = "translateX(-50%) scale(1)";
+  noBtn.style.transform = "scale(1)";
   noBtn.style.left = "50%";
   noBtn.style.top = "70%";
+  noBtn.style.transform = "translateX(-50%)";
 }
 
 function moveNo() {
   const noBtn = document.getElementById("noBtn");
   const page = noBtn.closest(".page");
 
-  const padding = 20;
-  const maxX = page.clientWidth - noBtn.offsetWidth - padding;
-  const maxY = page.clientHeight - noBtn.offsetHeight - padding;
+  const maxX = page.clientWidth - noBtn.offsetWidth;
+  const maxY = page.clientHeight - noBtn.offsetHeight;
 
   const randomX = Math.random() * maxX;
   const randomY = Math.random() * maxY;
@@ -70,11 +174,22 @@ function moveNo() {
 
 function growYes() {
   const yesBtn = document.getElementById("yesBtn");
-  yesScale *= 1.4;
+  const page = yesBtn.closest(".page");
+
+  yesScale *= 2;
+
+  const maxScale = (page.clientWidth / yesBtn.offsetWidth) / 2;
+  if (yesScale > maxScale) yesScale = maxScale;
+
   yesBtn.style.transform = `scale(${yesScale})`;
 }
 
 function handleYes() {
   showPage("finalPage");
 }
+
+document.getElementById("yesBtn")?.addEventListener("click", handleYes);
 </script>
+
+</body>
+</html>
