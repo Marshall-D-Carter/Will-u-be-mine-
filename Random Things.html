@@ -12,7 +12,6 @@
       align-items: center;
       height: 100vh;
       background-color: #ffd1dc;
-      transition: background-color 0.5s ease;
     }
 
     .page {
@@ -49,11 +48,6 @@
       background-color: #ff6fa1;
       color: white;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #ff4d84;
     }
 
     .small-no {
@@ -106,15 +100,16 @@
     <button onclick="handleYes()">Yes</button>
   </div>
 
-
   <div class="page" id="finalPage">
-    <h2>I knoww that u be mine n i love you as the fish loves water as the bee loves flowerss..<br>
-    I love u tilll I lived n even after I diee I want to spend that time n maybee in another universe with uu,<br>
-    mwahhhhh love uu darlingg</h2>
+    <h2>
+      I know that u be mine and I love you as the fish loves water as the bee loves flowers.<br>
+      I love u till I live and even after I die I want to spend that time in another universe with you.<br>
+      mwah love you darling
+    </h2>
   </div>
 
   <script>
-    const acceptedDOBs = ["Add ur loved one D.O.B"];
+    const acceptedDOBs = ["2009-11-24"]; 
 
     function showPage(id) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -130,8 +125,9 @@
       showPage('page2');
     }
 
-    function checkDOB(24/11/2009) {
+    function checkDOB() {
       const dob = document.getElementById('dobInput').value;
+
       if (acceptedDOBs.includes(dob)) {
         showPage('page3');
       } else {
@@ -154,4 +150,3 @@
 
 </body>
 </html>
-
