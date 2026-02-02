@@ -69,7 +69,6 @@
 </head>
 <body>
 
-  <!-- Page 1: Name -->
   <div class="page active" id="page1">
     <h2>What's your name?</h2>
     <input type="text" id="nameInput" placeholder="Enter your name" />
@@ -77,7 +76,6 @@
     <button onclick="goToPage2()">Next</button>
   </div>
 
-  <!-- Page 2: Age + DOB -->
   <div class="page" id="page2">
     <h2>How old are you and when were you born?</h2>
     <input type="number" id="ageInput" placeholder="Enter your age" />
@@ -87,37 +85,32 @@
     <button onclick="checkDOB()">Next</button>
   </div>
 
-  <!-- Page 3: Wrong person -->
   <div class="page" id="wrongPerson">
     <h2>Sorry, wrong person 😔</h2>
   </div>
 
-  <!-- Page 4: Will you be mine? -->
   <div class="page" id="page3">
     <h2>Will you be mine?</h2>
     <button onclick="handleYes()">Yes</button>
     <button onclick="handleNo()">No</button>
   </div>
 
-  <!-- Page 5: Second No -->
   <div class="page" id="page4">
     <h2>Will you be mine?</h2>
     <button onclick="handleYes()">Yes</button>
     <button onclick="handleNoSecond()">No<span class="small-no">(true fs)</span></button>
   </div>
 
-  <!-- Page 6: Only Yes -->
   <div class="page" id="page5">
     <h2>Will you be mine?</h2>
     <button onclick="handleYes()">Yes</button>
   </div>
 
-  <!-- Page 7: Final message -->
+
   <div class="page" id="finalPage">
-    <h2>I know it looks like you're being forced,<br>
-    but still...<br>
-    I know you're elder and I respect your feelings,<br>
-    so I bury mine for you 🙂</h2>
+    <h2>I knoww that u be mine n i love you as the fish loves water as the bee loves flowerss..<br>
+    I love u tilll I lived n even after I diee I want to spend that time n maybee in another universe with uu,<br>
+    mwahhhhh love uu darlingg</h2>
   </div>
 
   <script>
@@ -137,7 +130,7 @@
       showPage('page2');
     }
 
-    function checkDOB() {
+    function checkDOB(24/11/2009) {
       const dob = document.getElementById('dobInput').value;
       if (acceptedDOBs.includes(dob)) {
         showPage('page3');
@@ -161,3 +154,4 @@
 
 </body>
 </html>
+
